@@ -170,7 +170,7 @@ Material:
     - _RimMax: 1
     - _RimMin: 0.5
     - _SingleIndirectColor: 0
-    - _Smoothness: 0.5
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularMapType: 0
