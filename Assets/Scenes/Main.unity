@@ -928,9 +928,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 10
-  inputSmoothSpeed: 3
+  turnSmoothSpeed: 5
+  bankSmoothSpeed: 3
   rotationSpeed: 60
-  simulateInput: 1
+  bankAngle: 30
+  simulateInput: 0
   simulatedFlyUp: 0
   simulatedFlyRight: -1
 --- !u!135 &1074465111

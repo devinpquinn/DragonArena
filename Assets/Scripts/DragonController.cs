@@ -9,8 +9,10 @@ public class DragonController : MonoBehaviour
 
     [Header("Flight Controls")]
     public float forwardSpeed = 10f;
-    public float inputSmoothSpeed = 5f;
+    public float turnSmoothSpeed = 5f;
+    public float bankSmoothSpeed = 5f;
     public float rotationSpeed = 90f; // degrees per second
+    public float bankAngle = 20f; // degrees for banking effect
 
     private float currentFlyUp = 0f;
     private float currentFlyRight = 0f;
@@ -67,8 +69,8 @@ public class DragonController : MonoBehaviour
         }
 
         // Smoothly interpolate to target values
-        currentFlyUp = Mathf.Lerp(currentFlyUp, verticalInput, inputSmoothSpeed * Time.deltaTime);
-        currentFlyRight = Mathf.Lerp(currentFlyRight, horizontalInput, inputSmoothSpeed * Time.deltaTime);
+        currentFlyUp = Mathf.Lerp(currentFlyUp, verticalInput, turnSmoothSpeed * Time.deltaTime);
+        currentFlyRight = Mathf.Lerp(currentFlyRight, horizontalInput, turnSmoothSpeed * Time.deltaTime);
 
         // Set the animator parameters
         animator.SetFloat("FlyUp", currentFlyUp);
@@ -77,6 +79,12 @@ public class DragonController : MonoBehaviour
         // Handle turning
         float turnAmount = currentFlyRight * rotationSpeed * Time.deltaTime;
         transform.Rotate(0f, turnAmount, 0f, Space.World);
+        
+        // Handle banking
+        float targetBankAngle = -currentFlyRight * bankAngle;
+        float currentBankAngle = transform.localEulerAngles.z;
+        float newBankAngle = Mathf.LerpAngle(currentBankAngle, targetBankAngle, bankSmoothSpeed * Time.deltaTime);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, newBankAngle);
     }
 
     void HandleForwardMovement()
