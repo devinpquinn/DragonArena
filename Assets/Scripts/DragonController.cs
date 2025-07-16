@@ -17,7 +17,6 @@ public class DragonController : MonoBehaviour
     [SerializeField] private float bankAngle = 30.0f; // How much the dragon banks when turning
     [SerializeField] private float pitchAngle = 20.0f; // How much the dragon pitches when climbing/diving
     
-    private Vector2 screenCenter;
     private Vector2 currentInput;
     private Vector2 smoothedInput;
     private Vector3 startPosition;
@@ -30,9 +29,6 @@ public class DragonController : MonoBehaviour
         if (targetAnimator == null)
             targetAnimator = GetComponent<Animator>();
             
-        // Calculate screen center
-        screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-        
         // Store starting position and rotation as reference points
         startPosition = transform.position;
         baseRotation = transform.rotation;
@@ -41,21 +37,21 @@ public class DragonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleMouseInput();
+        HandleKeyboardInput();
         UpdateAnimationParameters();
         UpdateMovement();
         UpdateRotation();
     }
     
-    private void HandleMouseInput()
+    private void HandleKeyboardInput()
     {
-        // Get mouse position relative to screen center
-        Vector2 mousePos = Input.mousePosition;
-        Vector2 mouseOffset = mousePos - screenCenter;
+        // Get WASD input
+        float horizontal = Input.GetAxis("Horizontal"); // A/D keys
+        float vertical = Input.GetAxis("Vertical");     // W/S keys
         
-        // Normalize to -1 to 1 range based on screen size
-        currentInput.x = (mouseOffset.x / screenCenter.x) * sensitivity; // FlyRight
-        currentInput.y = (mouseOffset.y / screenCenter.y) * sensitivity; // FlyUp
+        // Apply sensitivity
+        currentInput.x = horizontal * sensitivity; // FlyRight
+        currentInput.y = vertical * sensitivity;   // FlyUp
         
         // Clamp values to -1 to 1 range
         currentInput.x = Mathf.Clamp(currentInput.x, -1f, 1f);
