@@ -74,9 +74,9 @@ public class DragonController : MonoBehaviour
         animator.SetFloat("FlyUp", currentFlyUp);
         animator.SetFloat("FlyRight", currentFlyRight);
 
-        // Handle rotation
-        float rotationAmount = currentFlyRight * rotationSpeed * Time.deltaTime;
-        transform.Rotate(0f, rotationAmount, 0f, Space.Self);
+        // Handle turning
+        float turnAmount = currentFlyRight * rotationSpeed * Time.deltaTime;
+        transform.Rotate(0f, turnAmount, 0f, Space.World);
     }
 
     void HandleForwardMovement()
