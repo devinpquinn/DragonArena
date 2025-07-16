@@ -76,22 +76,18 @@ public class DragonController : MonoBehaviour
     
     private void UpdateMovement()
     {
-        // Calculate target position based on mouse input
-        Vector3 targetOffset = new Vector3(
-            smoothedInput.x * horizontalRange,
-            smoothedInput.y * verticalRange,
+        // Move forward in the direction the dragon is currently facing
+        transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime, Space.Self);
+        
+        // Optional: Apply additional positional offset based on mouse input for more responsive feel
+        Vector3 lateralMovement = new Vector3(
+            smoothedInput.x * horizontalRange * Time.deltaTime,
+            smoothedInput.y * verticalRange * Time.deltaTime,
             0
         );
         
-        Vector3 targetPosition = startPosition + targetOffset;
-        
-        // Move forward continuously
-        transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime, Space.Self);
-        
-        // Smoothly move towards the target horizontal and vertical position
-        Vector3 currentPos = transform.position;
-        Vector3 desiredPos = new Vector3(targetPosition.x, targetPosition.y, currentPos.z);
-        transform.position = Vector3.Lerp(currentPos, desiredPos, smoothSpeed * Time.deltaTime);
+        // Apply lateral movement in world space for more natural feel
+        transform.Translate(lateralMovement, Space.World);
     }
     
     private void UpdateRotation()
@@ -102,14 +98,42 @@ public class DragonController : MonoBehaviour
         // Calculate pitching based on vertical movement
         float pitchRotation = -smoothedInput.y * pitchAngle;
         
-        // Calculate yaw (turning) based on horizontal input
+        // Calculate yaw (turning) based on horizontal input for actual direction change
         float yawRotation = smoothedInput.x * rotationSpeed * Time.deltaTime;
         
-        // Apply banking and pitching relative to base rotation
-        Quaternion targetRotation = baseRotation * Quaternion.Euler(pitchRotation, 0, bankRotation);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        
-        // Apply continuous yaw rotation
+        // Apply yaw rotation first to change flight direction
         transform.Rotate(0, yawRotation, 0, Space.World);
+        
+        // Get current rotation and clamp the roll to prevent going upside down
+        Vector3 currentEuler = transform.eulerAngles;
+        
+        // Convert angles to -180 to 180 range for easier clamping
+        float currentRoll = currentEuler.z;
+        if (currentRoll > 180) currentRoll -= 360;
+        
+        float currentPitch = currentEuler.x;
+        if (currentPitch > 180) currentPitch -= 360;
+        
+        // Calculate target roll with banking, but clamp it
+        float targetRoll = bankRotation;
+        targetRoll = Mathf.Clamp(targetRoll, -bankAngle, bankAngle);
+        
+        // Calculate target pitch, but clamp it too
+        float targetPitch = currentPitch + pitchRotation;
+        targetPitch = Mathf.Clamp(targetPitch, -pitchAngle, pitchAngle);
+        
+        // Apply the clamped rotations
+        Vector3 targetEuler = new Vector3(
+            targetPitch,
+            currentEuler.y,
+            targetRoll
+        );
+        
+        // Smooth the banking and pitching rotations
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation, 
+            Quaternion.Euler(targetEuler), 
+            smoothSpeed * Time.deltaTime
+        );
     }
 }
