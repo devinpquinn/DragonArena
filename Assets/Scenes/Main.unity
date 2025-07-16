@@ -920,7 +920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 10
-  inputSmoothSpeed: 5
+  inputSmoothSpeed: 3
   rotationSpeed: 60
 --- !u!135 &1074465111
 SphereCollider:
