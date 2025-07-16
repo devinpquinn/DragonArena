@@ -7,20 +7,18 @@ public class DragonController : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
 
-    [Header("Movement")]
-    [Tooltip("Constant forward movement speed")]
-    public float forwardSpeed = 10f;
-
     [Header("Flight Controls")]
-    [Tooltip("Speed at which the flight parameters change")]
+    public float forwardSpeed = 10f;
     public float inputSmoothSpeed = 5f;
-
-    [Header("Rotation Controls")]
-    [Tooltip("Speed at which the dragon rotates left and right")]
     public float rotationSpeed = 90f; // degrees per second
 
     private float currentFlyUp = 0f;
     private float currentFlyRight = 0f;
+
+    [Header("Simulation Controls")]
+    public bool simulateInput = false;
+    public float simulatedFlyUp = 0f;
+    public float simulatedFlyRight = -1f;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +58,13 @@ public class DragonController : MonoBehaviour
             horizontalInput = 1f;  // Fly right
         else if (Input.GetKey(KeyCode.A))
             horizontalInput = -1f; // Fly left
+            
+        // Simulate input if enabled
+        if (simulateInput)
+        {
+            verticalInput = simulatedFlyUp;
+            horizontalInput = simulatedFlyRight;
+        }
 
         // Smoothly interpolate to target values
         currentFlyUp = Mathf.Lerp(currentFlyUp, verticalInput, inputSmoothSpeed * Time.deltaTime);
