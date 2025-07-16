@@ -11,9 +11,9 @@ public class DragonController : MonoBehaviour
     
     [Header("Movement Settings")]
     [SerializeField] private float forwardSpeed = 10.0f;
-    [SerializeField] private float horizontalRange = 10.0f;
-    [SerializeField] private float verticalRange = 5.0f;
-    [SerializeField] private float rotationSpeed = 50.0f;
+    [SerializeField] private float horizontalRange = 5.0f;
+    [SerializeField] private float verticalRange = 3.0f;
+    [SerializeField] private float rotationSpeed = 80.0f; // Increased for more responsive turning
     [SerializeField] private float bankAngle = 30.0f; // How much the dragon banks when turning
     [SerializeField] private float pitchAngle = 20.0f; // How much the dragon pitches when climbing/diving
     
@@ -39,8 +39,8 @@ public class DragonController : MonoBehaviour
     {
         HandleKeyboardInput();
         UpdateAnimationParameters();
-        UpdateMovement();
         UpdateRotation();
+        UpdateMovement();
     }
     
     private void HandleKeyboardInput()
@@ -49,11 +49,16 @@ public class DragonController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal"); // A/D keys
         float vertical = Input.GetAxis("Vertical");     // W/S keys
         
-        // Apply sensitivity
-        currentInput.x = horizontal * sensitivity; // FlyRight
-        currentInput.y = vertical * sensitivity;   // FlyUp
+        // Create input vector and normalize it to prevent faster diagonal movement
+        Vector2 rawInput = new Vector2(horizontal, vertical);
+        if (rawInput.magnitude > 1f)
+            rawInput = rawInput.normalized;
         
-        // Clamp values to -1 to 1 range
+        // Apply sensitivity
+        currentInput.x = rawInput.x * sensitivity; // FlyRight
+        currentInput.y = rawInput.y * sensitivity; // FlyUp
+        
+        // Clamp values to -1 to 1 range (should already be normalized, but just in case)
         currentInput.x = Mathf.Clamp(currentInput.x, -1f, 1f);
         currentInput.y = Mathf.Clamp(currentInput.y, -1f, 1f);
         
@@ -72,18 +77,8 @@ public class DragonController : MonoBehaviour
     
     private void UpdateMovement()
     {
-        // Move forward in the direction the dragon is currently facing
+        // Simply move forward in whatever direction the dragon is currently facing
         transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime, Space.Self);
-        
-        // Optional: Apply additional positional offset based on mouse input for more responsive feel
-        Vector3 lateralMovement = new Vector3(
-            smoothedInput.x * horizontalRange * Time.deltaTime,
-            smoothedInput.y * verticalRange * Time.deltaTime,
-            0
-        );
-        
-        // Apply lateral movement in world space for more natural feel
-        transform.Translate(lateralMovement, Space.World);
     }
     
     private void UpdateRotation()
