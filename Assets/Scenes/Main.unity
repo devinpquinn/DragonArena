@@ -929,11 +929,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardSpeed: 10
   turnSmoothSpeed: 5
-  bankSmoothSpeed: 3
+  bankSmoothSpeed: 2
   rotationSpeed: 60
   bankAngle: 30
   cameraTransform: {fileID: 330585546}
-  cameraBankRotation: -1
+  cameraBankRotation: -1.5
   simulateInput: 0
   simulatedFlyUp: 0
   simulatedFlyRight: -1
