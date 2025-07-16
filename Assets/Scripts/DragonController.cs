@@ -8,7 +8,7 @@ public class DragonController : MonoBehaviour
     
     [Header("Flight Controls")]
     [Tooltip("Speed at which the flight parameters change")]
-    public float inputSmoothSpeed = 5f;
+    public float inputSmoothSpeed = 3f;
     
     private float currentFlyUp = 0f;
     private float currentFlyRight = 0f;
