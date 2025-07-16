@@ -931,9 +931,9 @@ MonoBehaviour:
   turnSmoothSpeed: 5
   bankSmoothSpeed: 2
   rotationSpeed: 60
-  bankAngle: 30
+  bankAngle: 45
   cameraTransform: {fileID: 330585546}
-  cameraBankRotation: -1.5
+  cameraBankRotation: -1
   simulateInput: 0
   simulatedFlyUp: 0
   simulatedFlyRight: -1
