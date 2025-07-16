@@ -17,6 +17,10 @@ public class DragonController : MonoBehaviour
     private float currentFlyUp = 0f;
     private float currentFlyRight = 0f;
 
+    [Header("Camera Settings")]
+    public Transform cameraTransform;
+    public float cameraBankRotation = 1f;
+
     [Header("Simulation Controls")]
     public bool simulateInput = false;
     public float simulatedFlyUp = 0f;
@@ -60,7 +64,7 @@ public class DragonController : MonoBehaviour
             horizontalInput = 1f;  // Fly right
         else if (Input.GetKey(KeyCode.A))
             horizontalInput = -1f; // Fly left
-            
+
         // Simulate input if enabled
         if (simulateInput)
         {
@@ -79,12 +83,16 @@ public class DragonController : MonoBehaviour
         // Handle turning
         float turnAmount = currentFlyRight * rotationSpeed * Time.deltaTime;
         transform.Rotate(0f, turnAmount, 0f, Space.World);
-        
+
         // Handle banking
         float targetBankAngle = -currentFlyRight * bankAngle;
         float currentBankAngle = transform.localEulerAngles.z;
         float newBankAngle = Mathf.LerpAngle(currentBankAngle, targetBankAngle, bankSmoothSpeed * Time.deltaTime);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, newBankAngle);
+
+        // Rotate the camera based on banking
+        float cameraRotationZ = newBankAngle * -cameraBankRotation;
+        cameraTransform.localEulerAngles = new Vector3(cameraTransform.localEulerAngles.x, cameraTransform.localEulerAngles.y, cameraRotationZ);
     }
 
     void HandleForwardMovement()

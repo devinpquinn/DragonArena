@@ -884,7 +884,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6734055608777744776, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 1074465109}
     - targetCorrespondingSourceObject: {fileID: 6734055608777744776, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -932,6 +932,8 @@ MonoBehaviour:
   bankSmoothSpeed: 3
   rotationSpeed: 60
   bankAngle: 30
+  cameraTransform: {fileID: 330585546}
+  cameraBankRotation: -1
   simulateInput: 0
   simulatedFlyUp: 0
   simulatedFlyRight: -1
