@@ -886,6 +886,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1074465109}
+    - targetCorrespondingSourceObject: {fileID: 6734055608777744776, guid: 3fdcd10a3a355844fa2616356b1404b9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1074465112}
+    - targetCorrespondingSourceObject: {fileID: 6734055608777744776, guid: 3fdcd10a3a355844fa2616356b1404b9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1074465111}
   m_SourcePrefab: {fileID: 100100000, guid: 3fdcd10a3a355844fa2616356b1404b9, type: 3}
 --- !u!1 &1074465105 stripped
 GameObject:
@@ -911,7 +919,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91ea575a56e21846915d9bbcc3181a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputSmoothSpeed: 3
+  forwardSpeed: 10
+  inputSmoothSpeed: 5
+  rotationSpeed: 60
+--- !u!135 &1074465111
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074465105}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.66, z: 0}
+--- !u!54 &1074465112
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074465105}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!23 &301721825153365001
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -963,7 +1021,7 @@ Transform:
   m_GameObject: {fileID: 3364659704058682978}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -19.632547, y: -10, z: 235.72665}
+  m_LocalPosition: {x: -19.632547, y: -5, z: 235.72665}
   m_LocalScale: {x: 500, y: 5, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
