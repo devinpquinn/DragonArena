@@ -34,8 +34,8 @@ public class InputHandle : MonoBehaviour
         JumpHold = Input.GetButton("Jump");
         Fly = JumpHold; 
 
-        RB = Input.GetButton("RightTilt");
-        LB = Input.GetButton("LeftTilt");
+        //RB = Input.GetButton("RightTilt");
+        //LB = Input.GetButton("LeftTilt");
 
     }
 }
