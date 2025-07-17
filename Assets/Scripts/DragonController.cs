@@ -20,7 +20,7 @@ public class DragonController : MonoBehaviour
 
     [Header("Camera Settings")]
     public Transform cameraTransform;
-    public float cameraBankRotation = 1f;
+    public float cameraBankCounterRotation = 1f;
 
     [Header("Simulation Controls")]
     public bool simulateInput = false;
@@ -91,7 +91,7 @@ public class DragonController : MonoBehaviour
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, currentBankAngle);
 
         // Rotate the camera based on banking
-        float cameraRotationZ = currentBankAngle * cameraBankRotation;
+        float cameraRotationZ = currentBankAngle * -cameraBankCounterRotation;
         cameraTransform.localEulerAngles = new Vector3(cameraTransform.localEulerAngles.x, cameraTransform.localEulerAngles.y, cameraRotationZ);
     }
 
