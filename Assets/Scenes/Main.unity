@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a4382909c498d0047931a0fbf0b4a6b4, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -742,7 +742,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653728, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653728, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -752,7 +752,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653730, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653730, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -787,7 +787,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653740, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653740, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -802,7 +802,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653742, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -170
+      value: -175
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653742, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -948,7 +948,7 @@ MonoBehaviour:
   rotationSpeed: 60
   bankAngle: 45
   cameraTransform: {fileID: 330585546}
-  cameraBankRotation: -1
+  cameraBankCounterRotation: 1
   simulateInput: 0
   simulatedFlyUp: 0
   simulatedFlyRight: -1
@@ -1210,7 +1210,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1328,7 +1328,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1792,7 +1792,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.5
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -2341,7 +2341,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -2350,7 +2350,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -2374,7 +2374,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
