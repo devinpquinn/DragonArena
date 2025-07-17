@@ -89,7 +89,6 @@ public class DragonController : MonoBehaviour
         float targetBankAngle = -currentFlyRight * bankAngle;
         currentBankAngle = Mathf.LerpAngle(currentBankAngle, targetBankAngle, bankSmoothSpeed * Time.deltaTime);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, currentBankAngle);
-        Debug.Log($"Bank Angle: {currentBankAngle}");
 
         // Rotate the camera based on banking
         float cameraRotationZ = currentBankAngle * cameraBankRotation;
