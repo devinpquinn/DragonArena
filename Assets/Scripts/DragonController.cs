@@ -10,6 +10,7 @@ public class DragonController : MonoBehaviour
     [Header("Flight Controls")]
     public float forwardSpeed = 10f;
     public float turnSmoothSpeed = 5f;
+    public float pitchSmoothSpeed = 5f;
     public float bankSmoothSpeed = 5f;
     public float rotationSpeed = 90f; // degrees per second
     public float pitchSpeed = 60f; // degrees per second for pitching
@@ -77,7 +78,7 @@ public class DragonController : MonoBehaviour
         }
 
         // Smoothly interpolate to target values
-        currentFlyUp = Mathf.Lerp(currentFlyUp, verticalInput, turnSmoothSpeed * Time.deltaTime);
+        currentFlyUp = Mathf.Lerp(currentFlyUp, verticalInput, pitchSmoothSpeed * Time.deltaTime);
         currentFlyRight = Mathf.Lerp(currentFlyRight, horizontalInput, turnSmoothSpeed * Time.deltaTime);
 
         // Set the animator parameters
