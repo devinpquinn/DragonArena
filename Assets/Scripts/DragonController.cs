@@ -27,6 +27,7 @@ public class DragonController : MonoBehaviour
     [Header("Camera Settings")]
     public Transform cameraTransform;
     public float cameraBankCounterRotation = 1f;
+    public float cameraPitchMultiplier = 0.3f; // How much the camera pitches with dragon movement
 
     [Header("Simulation Controls")]
     public bool simulateInput = false;
@@ -111,9 +112,10 @@ public class DragonController : MonoBehaviour
         currentBankAngle = Mathf.LerpAngle(currentBankAngle, targetBankAngle, bankSmoothSpeed * Time.deltaTime);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, currentBankAngle);
 
-        // Rotate the camera based on banking
+        // Rotate the camera based on banking and pitching
         float cameraRotationZ = currentBankAngle * -cameraBankCounterRotation;
-        cameraTransform.localEulerAngles = new Vector3(cameraTransform.localEulerAngles.x, cameraTransform.localEulerAngles.y, cameraRotationZ);
+        float cameraRotationX = currentPitchAngle * cameraPitchMultiplier;
+        cameraTransform.localEulerAngles = new Vector3(cameraRotationX, cameraTransform.localEulerAngles.y, cameraRotationZ);
     }
 
     void HandleForwardMovement()
