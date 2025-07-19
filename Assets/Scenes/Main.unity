@@ -953,7 +953,7 @@ MonoBehaviour:
   upwardMovementMult: 0.75
   downwardMovementMult: 1.5
   cameraTransform: {fileID: 330585546}
-  cameraBankCounterRotation: 1
+  cameraBankCounterRotation: 0.9
   cameraPitchMultiplier: 0.1
   simulateInput: 0
   simulatedFlyUp: 0

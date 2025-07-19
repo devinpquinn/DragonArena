@@ -88,14 +88,34 @@ public class DragonController : MonoBehaviour
         animator.SetFloat("FlyUp", currentFlyUp);
         animator.SetFloat("FlyRight", currentFlyRight);
 
-        // Handle pitching (up/down rotation) with angle limits
-        float pitchAmount = -currentFlyUp * pitchSpeed * Time.deltaTime; // Negative for intuitive controls
+        // Handle pitching (up/down rotation) with eased angle limits
+        float basePitchAmount = -currentFlyUp * pitchSpeed * Time.deltaTime; // Negative for intuitive controls
+        
+        // Calculate how close we are to the pitch limits (0 = at center, 1 = at limit)
+        float pitchRatio = Mathf.Abs(currentPitchAngle) / maxPitchAngle;
+        
+        // Apply easing factor when approaching limits
+        float easingFactor = 1f;
+        if (pitchRatio > 0.7f) // Start easing when 70% of the way to the limit
+        {
+            // Use a smooth curve that goes from 1.0 to 0.0 as we approach the limit
+            float easingProgress = (pitchRatio - 0.7f) / 0.3f; // Normalize to 0-1 range
+            easingFactor = 1f - (easingProgress * easingProgress); // Quadratic easing
+        }
+        
+        // Check if we're trying to pitch further in the direction of the limit
+        bool pitchingTowardLimit = (currentPitchAngle > 0 && basePitchAmount > 0) || 
+                                  (currentPitchAngle < 0 && basePitchAmount < 0);
+        
+        // Apply easing only when pitching toward the limit
+        float pitchAmount = pitchingTowardLimit ? basePitchAmount * easingFactor : basePitchAmount;
+        
         float newPitchAngle = currentPitchAngle + pitchAmount;
         
-        // Clamp the pitch angle to the maximum limits
+        // Still clamp as a safety measure, but the easing should prevent us from reaching this
         newPitchAngle = Mathf.Clamp(newPitchAngle, -maxPitchAngle, maxPitchAngle);
         
-        // Only apply the rotation if it's within limits
+        // Apply the rotation
         float actualPitchAmount = newPitchAngle - currentPitchAngle;
         if (Mathf.Abs(actualPitchAmount) > 0.001f) // Small threshold to avoid floating point errors
         {
