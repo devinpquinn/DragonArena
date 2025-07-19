@@ -12,11 +12,14 @@ public class DragonController : MonoBehaviour
     public float turnSmoothSpeed = 5f;
     public float bankSmoothSpeed = 5f;
     public float rotationSpeed = 90f; // degrees per second
+    public float pitchSpeed = 60f; // degrees per second for pitching
+    public float maxPitchAngle = 45f; // maximum pitch angle in degrees
     public float bankAngle = 20f; // degrees for banking effect
 
     private float currentFlyUp = 0f;
     private float currentFlyRight = 0f;
     private float currentBankAngle = 0f;
+    private float currentPitchAngle = 0f;
 
     [Header("Camera Settings")]
     public Transform cameraTransform;
@@ -80,6 +83,21 @@ public class DragonController : MonoBehaviour
         // Set the animator parameters
         animator.SetFloat("FlyUp", currentFlyUp);
         animator.SetFloat("FlyRight", currentFlyRight);
+
+        // Handle pitching (up/down rotation) with angle limits
+        float pitchAmount = -currentFlyUp * pitchSpeed * Time.deltaTime; // Negative for intuitive controls
+        float newPitchAngle = currentPitchAngle + pitchAmount;
+        
+        // Clamp the pitch angle to the maximum limits
+        newPitchAngle = Mathf.Clamp(newPitchAngle, -maxPitchAngle, maxPitchAngle);
+        
+        // Only apply the rotation if it's within limits
+        float actualPitchAmount = newPitchAngle - currentPitchAngle;
+        if (Mathf.Abs(actualPitchAmount) > 0.001f) // Small threshold to avoid floating point errors
+        {
+            transform.Rotate(actualPitchAmount, 0f, 0f, Space.Self);
+            currentPitchAngle = newPitchAngle;
+        }
 
         // Handle turning
         float turnAmount = currentFlyRight * rotationSpeed * Time.deltaTime;
