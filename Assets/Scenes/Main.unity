@@ -943,13 +943,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 8
-  turnSmoothSpeed: 5
-  pitchSmoothSpeed: 5
+  turnSmoothSpeed: 4
+  pitchSmoothSpeed: 2
   bankSmoothSpeed: 2
   rotationSpeed: 60
   pitchSpeed: 60
   maxPitchAngle: 45
   bankAngle: 45
+  upwardMovementMult: 0.75
+  downwardMovementMult: 1.5
   cameraTransform: {fileID: 330585546}
   cameraBankCounterRotation: 1
   simulateInput: 0
@@ -1160,7 +1162,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 8
       minScalar: 5
       maxCurve:
         serializedVersion: 2

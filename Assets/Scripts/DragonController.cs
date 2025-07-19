@@ -16,6 +16,8 @@ public class DragonController : MonoBehaviour
     public float pitchSpeed = 60f; // degrees per second for pitching
     public float maxPitchAngle = 45f; // maximum pitch angle in degrees
     public float bankAngle = 20f; // degrees for banking effect
+    public float upwardMovementMult = 0.5f; // Multiplier for upward movement speed
+    public float downwardMovementMult = 1.5f; // Multiplier for downward movement speed
 
     private float currentFlyUp = 0f;
     private float currentFlyRight = 0f;
@@ -118,8 +120,24 @@ public class DragonController : MonoBehaviour
     {
         if (rb != null)
         {
-            // Move forward in the direction the dragon is facing
-            Vector3 forwardMovement = transform.forward * forwardSpeed;
+            // Calculate speed multiplier based on dragon's pitch angle proportional to max angle
+            float speedMultiplier = 1f;
+            
+            if (currentPitchAngle < 0) // Pitched upward (negative angle due to negative pitchAmount)
+            {
+                // Interpolate between 1.0 and upwardMovementMult based on pitch angle
+                float pitchRatio = Mathf.Abs(currentPitchAngle) / maxPitchAngle;
+                speedMultiplier = Mathf.Lerp(1f, upwardMovementMult, pitchRatio);
+            }
+            else if (currentPitchAngle > 0) // Pitched downward (positive angle)
+            {
+                // Interpolate between 1.0 and downwardMovementMult based on pitch angle
+                float pitchRatio = currentPitchAngle / maxPitchAngle;
+                speedMultiplier = Mathf.Lerp(1f, downwardMovementMult, pitchRatio);
+            }
+
+            // Move forward in the direction the dragon is facing with adjusted speed
+            Vector3 forwardMovement = transform.forward * forwardSpeed * speedMultiplier;
 
             // Apply the movement
             rb.velocity = forwardMovement;
