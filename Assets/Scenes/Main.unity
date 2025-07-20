@@ -948,13 +948,14 @@ MonoBehaviour:
   bankSmoothSpeed: 2
   rotationSpeed: 60
   pitchSpeed: 60
-  maxPitchAngle: 45
+  maxPitchAngle: 60
   bankAngle: 45
   upwardMovementMult: 0.75
   downwardMovementMult: 1.5
+  pitchEffortSpeed: 2
   cameraTransform: {fileID: 330585546}
   cameraBankCounterRotation: 0.9
-  cameraPitchMultiplier: 0.1
+  cameraPitchMultiplier: 0.2
   simulateInput: 0
   simulatedFlyUp: 0
   simulatedFlyRight: -1
