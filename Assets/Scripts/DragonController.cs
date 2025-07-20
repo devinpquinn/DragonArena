@@ -91,8 +91,11 @@ public class DragonController : MonoBehaviour
         // Handle pitching (up/down rotation) with eased angle limits
         float basePitchAmount = -currentFlyUp * pitchSpeed * Time.deltaTime; // Negative for intuitive controls
         
+        // Calculate target pitch angle
+        float targetPitchAngle = currentPitchAngle + basePitchAmount;
+        
         // Calculate how close we are to the pitch limits (0 = at center, 1 = at limit)
-        float pitchRatio = Mathf.Abs(currentPitchAngle) / maxPitchAngle;
+        float pitchRatio = Mathf.Abs(targetPitchAngle) / maxPitchAngle;
         
         // Apply easing factor when approaching limits
         float easingFactor = 1f;
@@ -101,27 +104,20 @@ public class DragonController : MonoBehaviour
             // Use a smooth curve that goes from 1.0 to 0.0 as we approach the limit
             float easingProgress = (pitchRatio - 0.7f) / 0.3f; // Normalize to 0-1 range
             easingFactor = 1f - (easingProgress * easingProgress); // Quadratic easing
+            
+            // Only apply easing when moving toward the limit
+            if (Mathf.Sign(basePitchAmount) == Mathf.Sign(targetPitchAngle))
+            {
+                basePitchAmount *= easingFactor;
+                targetPitchAngle = currentPitchAngle + basePitchAmount;
+            }
         }
         
-        // Check if we're trying to pitch further in the direction of the limit
-        bool pitchingTowardLimit = (currentPitchAngle > 0 && basePitchAmount > 0) || 
-                                  (currentPitchAngle < 0 && basePitchAmount < 0);
+        // Clamp the target pitch angle
+        targetPitchAngle = Mathf.Clamp(targetPitchAngle, -maxPitchAngle, maxPitchAngle);
         
-        // Apply easing only when pitching toward the limit
-        float pitchAmount = pitchingTowardLimit ? basePitchAmount * easingFactor : basePitchAmount;
-        
-        float newPitchAngle = currentPitchAngle + pitchAmount;
-        
-        // Still clamp as a safety measure, but the easing should prevent us from reaching this
-        newPitchAngle = Mathf.Clamp(newPitchAngle, -maxPitchAngle, maxPitchAngle);
-        
-        // Apply the rotation
-        float actualPitchAmount = newPitchAngle - currentPitchAngle;
-        if (Mathf.Abs(actualPitchAmount) > 0.001f) // Small threshold to avoid floating point errors
-        {
-            transform.Rotate(actualPitchAmount, 0f, 0f, Space.Self);
-            currentPitchAngle = newPitchAngle;
-        }
+        // Update current pitch angle
+        currentPitchAngle = targetPitchAngle;
 
         // Handle turning
         float turnAmount = currentFlyRight * rotationSpeed * Time.deltaTime;
@@ -130,7 +126,13 @@ public class DragonController : MonoBehaviour
         // Handle banking
         float targetBankAngle = -currentFlyRight * bankAngle;
         currentBankAngle = Mathf.LerpAngle(currentBankAngle, targetBankAngle, bankSmoothSpeed * Time.deltaTime);
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, currentBankAngle);
+        
+        // Apply pitch and bank rotations using absolute Euler angles
+        // Keep the current Y rotation (yaw) and apply the new pitch and bank
+        Vector3 currentEulers = transform.eulerAngles;
+        // Normalize the Y angle to prevent accumulation issues
+        float currentYaw = currentEulers.y;
+        transform.eulerAngles = new Vector3(currentPitchAngle, currentYaw, currentBankAngle);
 
         // Rotate the camera based on banking and pitching
         float cameraRotationZ = currentBankAngle * -cameraBankCounterRotation;
