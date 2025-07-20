@@ -472,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653638, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 8.3865
+      value: -21.613
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653638, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -682,7 +682,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653684, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 14.2967
+      value: -15.703
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653688, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -747,7 +747,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653728, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -4.046
+      value: -24.046
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653730, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -757,7 +757,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653730, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -9.346
+      value: -29.346
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653734, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -792,7 +792,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653740, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 5.1332
+      value: -14.8668
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653742, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -807,7 +807,7 @@ PrefabInstance:
     - target: {fileID: 6734055608777653742, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 20.949
+      value: 40.949
       objectReference: {fileID: 0}
     - target: {fileID: 6734055608777653746, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
@@ -950,7 +950,7 @@ MonoBehaviour:
   pitchSpeed: 60
   maxPitchAngle: 60
   bankAngle: 45
-  upwardMovementMult: 0.75
+  upwardMovementMult: 0.5
   downwardMovementMult: 1.5
   pitchEffortSpeed: 1
   cameraTransform: {fileID: 330585546}
