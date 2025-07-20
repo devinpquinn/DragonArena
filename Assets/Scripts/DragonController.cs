@@ -93,10 +93,10 @@ public class DragonController : MonoBehaviour
         float targetPitchEffort = verticalInput;
         
         // Reduce effort as we approach pitch angle limits
-        if (Mathf.Abs(currentPitchAngle) > maxPitchAngle * 0.7f) // Start reducing effort at 70% of max angle
+        if (Mathf.Abs(currentPitchAngle) > maxPitchAngle * 0.5f) // Start reducing effort at 50% of max angle
         {
             float effortPitchRatio = Mathf.Abs(currentPitchAngle) / maxPitchAngle;
-            float effortReduction = 1f - ((effortPitchRatio - 0.7f) / 0.3f); // Linear reduction from 70% to 100%
+            float effortReduction = 1f - ((effortPitchRatio - 0.5f) / 0.5f); // Linear reduction from 50% to 100%
             effortReduction = Mathf.Clamp01(effortReduction);
             
             // Only reduce effort when moving toward the limit
