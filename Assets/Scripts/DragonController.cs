@@ -18,13 +18,15 @@ public class DragonController : MonoBehaviour
     public float bankAngle = 20f; // degrees for banking effect
     public float upwardMovementMult = 0.5f; // Multiplier for upward movement speed
     public float downwardMovementMult = 1.5f; // Multiplier for downward movement speed
-    public float pitchEffortSpeed = 8f; // Speed for pitch effort easing (separate from actual rotation)
+    public float animatorPitchEffortSpeed = 8f; // Speed for animator pitch effort easing
+    public float cameraPitchEffortSpeed = 8f; // Speed for camera pitch effort easing
 
     private float currentFlyUp = 0f;
     private float currentFlyRight = 0f;
     private float currentBankAngle = 0f;
     private float currentPitchAngle = 0f;
-    private float currentPitchEffort = 0f; // Represents dragon's effort/intention to pitch (for animation and camera)
+    private float currentAnimatorPitchEffort = 0f; // Represents dragon's effort for animation
+    private float currentCameraPitchEffort = 0f; // Represents dragon's effort for camera
 
     [Header("Camera Settings")]
     public Transform cameraTransform;
@@ -104,10 +106,11 @@ public class DragonController : MonoBehaviour
             }
         }
         
-        currentPitchEffort = Mathf.Lerp(currentPitchEffort, targetPitchEffort, pitchEffortSpeed * Time.deltaTime);
+        currentAnimatorPitchEffort = Mathf.Lerp(currentAnimatorPitchEffort, targetPitchEffort, animatorPitchEffortSpeed * Time.deltaTime);
+        currentCameraPitchEffort = Mathf.Lerp(currentCameraPitchEffort, targetPitchEffort, cameraPitchEffortSpeed * Time.deltaTime);
 
-        // Set the animator parameters using pitch effort instead of actual pitch angle
-        animator.SetFloat("FlyUp", currentPitchEffort);
+        // Set the animator parameters using animator pitch effort
+        animator.SetFloat("FlyUp", currentAnimatorPitchEffort);
         animator.SetFloat("FlyRight", currentFlyRight);
 
         // Handle pitching (up/down rotation) with eased angle limits
@@ -156,9 +159,9 @@ public class DragonController : MonoBehaviour
         float currentYaw = currentEulers.y;
         transform.eulerAngles = new Vector3(currentPitchAngle, currentYaw, currentBankAngle);
 
-        // Rotate the camera based on banking and pitch effort (not actual pitch angle)
+        // Rotate the camera based on banking and camera pitch effort (not actual pitch angle)
         float cameraRotationZ = currentBankAngle * -cameraBankCounterRotation;
-        float cameraRotationX = -currentPitchEffort * maxPitchAngle * cameraPitchMultiplier; // Negative to fix inversion
+        float cameraRotationX = -currentCameraPitchEffort * maxPitchAngle * cameraPitchMultiplier; // Negative to fix inversion
         cameraTransform.localEulerAngles = new Vector3(cameraRotationX, cameraTransform.localEulerAngles.y, cameraRotationZ);
     }
 

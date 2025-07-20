@@ -952,7 +952,8 @@ MonoBehaviour:
   bankAngle: 45
   upwardMovementMult: 0.5
   downwardMovementMult: 1.5
-  pitchEffortSpeed: 1
+  animatorPitchEffortSpeed: 2
+  cameraPitchEffortSpeed: 1
   cameraTransform: {fileID: 330585546}
   cameraBankCounterRotation: 0.9
   cameraPitchMultiplier: 0.2
