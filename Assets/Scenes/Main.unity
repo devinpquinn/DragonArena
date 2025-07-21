@@ -438,32 +438,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7202e6d21f76bd34cbb737bcde269918, type: 2}
+      objectReference: {fileID: 2100000, guid: f7009dc96183a024d83b244a71ac0abf, type: 2}
     - target: {fileID: 6734055608766180498, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7202e6d21f76bd34cbb737bcde269918, type: 2}
+      objectReference: {fileID: 2100000, guid: f7009dc96183a024d83b244a71ac0abf, type: 2}
     - target: {fileID: 6734055608766180504, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7202e6d21f76bd34cbb737bcde269918, type: 2}
+      objectReference: {fileID: 2100000, guid: f7009dc96183a024d83b244a71ac0abf, type: 2}
     - target: {fileID: 6734055608766180506, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7202e6d21f76bd34cbb737bcde269918, type: 2}
+      objectReference: {fileID: 2100000, guid: f7009dc96183a024d83b244a71ac0abf, type: 2}
     - target: {fileID: 6734055608766180508, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7202e6d21f76bd34cbb737bcde269918, type: 2}
+      objectReference: {fileID: 2100000, guid: f7009dc96183a024d83b244a71ac0abf, type: 2}
     - target: {fileID: 6734055608766180510, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 268f60fe42999b14caa8b3775ceb2eef, type: 2}
+      objectReference: {fileID: 2100000, guid: fd522d915c89c234185aa429839595a5, type: 2}
     - target: {fileID: 6734055608770482778, guid: 3fdcd10a3a355844fa2616356b1404b9,
         type: 3}
       propertyPath: m_Controller
@@ -946,8 +946,8 @@ MonoBehaviour:
   turnSmoothSpeed: 4
   pitchSmoothSpeed: 2
   bankSmoothSpeed: 2
-  rotationSpeed: 60
-  pitchSpeed: 60
+  rotationSpeed: 90
+  pitchSpeed: 90
   maxPitchAngle: 60
   bankAngle: 45
   upwardMovementMult: 0.5
