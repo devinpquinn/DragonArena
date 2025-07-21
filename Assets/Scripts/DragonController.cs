@@ -21,6 +21,11 @@ public class DragonController : MonoBehaviour
     public float animatorPitchEffortSpeed = 8f; // Speed for animator pitch effort easing
     public float cameraPitchEffortSpeed = 8f; // Speed for camera pitch effort easing
 
+    [Header("Mouse Controls")]
+    public float mouseSensitivityX = 1f; // Horizontal mouse sensitivity
+    public float mouseSensitivityY = 1f; // Vertical mouse sensitivity
+    public float mouseDeadZone = 0.1f; // Dead zone around screen center (0-1)
+
     private float currentFlyUp = 0f;
     private float currentFlyRight = 0f;
     private float currentBankAngle = 0f;
@@ -61,21 +66,25 @@ public class DragonController : MonoBehaviour
 
     void HandleFlightInput()
     {
-        // Get WASD input
+        // Get mouse position input
         float verticalInput = 0f;
         float horizontalInput = 0f;
 
-        // W/S for up/down (FlyUp parameter)
-        if (Input.GetKey(KeyCode.W))
-            verticalInput = 1f;  // Fly up
-        else if (Input.GetKey(KeyCode.S))
-            verticalInput = -1f; // Fly down
-
-        // A/D for left/right (FlyRight parameter)
-        if (Input.GetKey(KeyCode.D))
-            horizontalInput = 1f;  // Fly right
-        else if (Input.GetKey(KeyCode.A))
-            horizontalInput = -1f; // Fly left
+        // Get mouse position relative to screen center
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 screenCenter = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
+        
+        // Calculate normalized mouse offset from center (-1 to 1)
+        float mouseOffsetX = (mousePosition.x - screenCenter.x) / (Screen.width * 0.5f);
+        float mouseOffsetY = (mousePosition.y - screenCenter.y) / (Screen.height * 0.5f);
+        
+        // Apply dead zone
+        if (Mathf.Abs(mouseOffsetX) < mouseDeadZone) mouseOffsetX = 0f;
+        if (Mathf.Abs(mouseOffsetY) < mouseDeadZone) mouseOffsetY = 0f;
+        
+        // Apply sensitivity and clamp to ensure values stay within -1 to 1 range
+        horizontalInput = Mathf.Clamp(mouseOffsetX * mouseSensitivityX, -1f, 1f);
+        verticalInput = Mathf.Clamp(mouseOffsetY * mouseSensitivityY, -1f, 1f);
 
         // Simulate input if enabled
         if (simulateInput)
