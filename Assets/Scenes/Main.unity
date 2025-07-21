@@ -946,8 +946,8 @@ MonoBehaviour:
   turnSmoothSpeed: 4
   pitchSmoothSpeed: 2
   bankSmoothSpeed: 2
-  rotationSpeed: 90
-  pitchSpeed: 90
+  rotationSpeed: 60
+  pitchSpeed: 60
   maxPitchAngle: 60
   bankAngle: 45
   upwardMovementMult: 0.5
