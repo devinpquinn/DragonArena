@@ -950,10 +950,13 @@ MonoBehaviour:
   pitchSpeed: 60
   maxPitchAngle: 60
   bankAngle: 45
-  upwardMovementMult: 0.5
+  upwardMovementMult: 0.75
   downwardMovementMult: 1.5
   animatorPitchEffortSpeed: 2
   cameraPitchEffortSpeed: 1
+  mouseSensitivityX: 1
+  mouseSensitivityY: 1
+  mouseDeadZone: 0.1
   cameraTransform: {fileID: 330585546}
   cameraBankCounterRotation: 0.9
   cameraPitchMultiplier: 0.2
